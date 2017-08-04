@@ -1,7 +1,7 @@
 var path = require('path')
 var assetsPath = path.join(process.cwd(), 'dist', 'client')
 var serverPath = path.join(process.cwd(), 'dist', 'server')
-
+var webpack = require('webpack');
 module.exports = [{
 
     name: 'browser',
@@ -10,7 +10,8 @@ module.exports = [{
 
     output: {
         path: assetsPath,
-        filename: 'client.boundle.js'
+        filename: '[name].client.js',
+        chunkFilename:'[name].chunk.js'
     },
 
     module: {
@@ -18,7 +19,21 @@ module.exports = [{
             test: /\.jsx?$/,
             loader: 'babel-loader?presets[]=es2015&presets[]=react'
         }]
-    }
+    },
+    plugins:[
+        new webpack.DefinePlugin({
+            'process.env': {NODE_ENV: '"production"'}
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            output: {
+                comments: false
+            },
+            sourceMap: false
+        })
+    ]
 }, {
     target: 'node',
     node: {
@@ -41,5 +56,19 @@ module.exports = [{
             test: /\.json$/,
             loader: 'json-loader'
         }]
-    }
+    },
+    plugins:[
+        new webpack.DefinePlugin({
+            'process.env': {NODE_ENV: '"production"'}
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            output: {
+                comments: false
+            },
+            sourceMap: false
+        })
+    ]
 }]

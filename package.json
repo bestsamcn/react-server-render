@@ -2,6 +2,7 @@
   "scripts": {
     "server": "webpack  --watch --config ./conf/webpack.server.conf.js && nodemon ./server/index.boundle.index.js",
     "build": "webpack --config ./conf/webpack.server.conf.js",
+    "clean":"rimraf ./dist",
     "dev": "webpack-dev-server --config ./conf/webpack.config.js --host localhost --inline --hot --history-api-fallback --content-base ."
   },
   "devDependencies": {

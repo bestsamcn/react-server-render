@@ -5,13 +5,16 @@ class List extends React.Component{
 	constructor(props){
 		super(props);
 	}
+	itemClick(item){
+		console.log(item);
+	}
 	render(){
 		return(
 			<div>
 				<ul>
 					{
 						this.props.list.map((item, index)=>(
-							<li key={index}>{item}</li>
+							<li onClick={this.itemClick.bind(this, item)} key={index}>{item}</li>
 						))
 					}
 				</ul>

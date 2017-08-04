@@ -26,20 +26,21 @@ function renderFullPage(html, initialState) {
       <script>
         window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
       </script>
-      <script src="/client/client.boundle.js"></script>
+      <script src="/client/main.client.js"></script>
     </body>
     </html>
   `;
 }
 
 app.use((req, res) => {
+  let msg = req.query.msg || 'hello world';
   match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
     if (err) {
       res.status(500).end(`Internal Server Error ${err}`);
     } else if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      var initstate = {list:{list:['1','2','3']}, item:{item:'hello world'}}
+      var initstate = {list:{list:['1','2','3']}, item:{item:msg}}
       var store = configureStore(initstate);
 
       var html = _render(store, renderProps);
