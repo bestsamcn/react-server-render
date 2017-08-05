@@ -1,30 +1,29 @@
+var path = require('path')
+var assetsPath = path.join(process.cwd(), 'dist', 'client')
 var webpack = require('webpack');
-var path = require('path');
-process.env.NODE_ENV = '"development"';
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-function resolve(dir) {
-    return path.join(__dirname, '..', dir)
-}
 module.exports = {
-    entry: './src/main.js',
+    name: 'browser',
+    devtool: 'cheap-module-source-map',
+    entry: {
+        //[app]为输出的文件名，output下的filename
+        main:'./src/client/main.js'
+        //公共文件分离
+    },
+
     output: {
-        filename: 'assets/js/bundle.js',
-        publicPath: '/'
+        path: assetsPath,
+        filename: 'js/[name].client.js',
+        publicPath:'/',
+        //打包require.ensure
+        chunkFilename:'js/[name].chunk.js'
     },
-    resolve: {
-        alias: {
-            'react': path.join(process.cwd(), 'node_modules', 'react')
-        },
-        extensions: ['', '.js']
-    },
+    
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            query: {
-                presets: ['es2015', 'react']
-            }
+            exclude: /(node_modules|bower_components)/,
+            loader: 'babel-loader?presets[]=es2015&presets[]=react'
         }, {
             test: /\.css$/,
             loader: 'style-loader!css-loader'
@@ -35,27 +34,27 @@ module.exports = {
                 limit: 10000,
                 name: 'img/[name].[ext]'
             }
-        }, {
-            test: /\.(eot|svg|ttf|woff|woff2)\w*/,
-            loader: 'url-loader?limit=1000000'
-        }, {
-            test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "file-loader"
         }]
     },
-
-    //开启sourcemap方便调试
-    devtool: 'source-map',
-    plugins: [
+    resolve: {
+        alias: {
+            '@': path.join(__dirname, '..', 'src'),
+        }
+    },
+    plugins:[
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(), 
+        new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
-            'process.env': process.env.NODE_ENV
+            'process.env': {NODE_ENV: '"development"'},
+            '__isServer__': false,
+            '__isClient__': true
         }),
         new HtmlWebpackPlugin({
-          filename: 'index.html',
-          template: 'index.html',
-          inject: true
+            filename: 'index.html',
+            template: 'index.html',
+            inject: true
         })
+
     ]
 }

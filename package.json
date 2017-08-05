@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "server": "webpack  --watch --config ./conf/webpack.server.conf.js && nodemon ./dist/server/server.boundle.js",
+    "server": "webpack  --watch --config ./conf/webpack.server.conf.js --progress",
     "build": "webpack --config ./conf/webpack.server.conf.js",
     "clean":"rimraf ./dist",
-    "dev": "webpack-dev-server --config ./conf/webpack.config.js --host localhost --inline --hot --history-api-fallback --content-base ."
+    "dev": "webpack-dev-server --config ./conf/webpack.config.js --host localhost --progress --inline --hot --history-api-fallback --content-base "
   },
   "devDependencies": {
     "axios": "^0.16.2",

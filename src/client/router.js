@@ -1,5 +1,6 @@
 import React from 'react';
 import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-router';
+import './assets/css/common/base.css';
 // Hook for server
 if (typeof require.ensure !== 'function') {
     require.ensure = function(dependencies, callback) {
@@ -11,26 +12,16 @@ const App = (location, cb) => {
         cb(null, require('./App').default)
     },'App')
 }
-const List = (location, cb) => {
+const Home = (location, cb) => {
     require.ensure([], require => {
-        cb(null, require('./components/List').default)
-    },'List')
+        cb(null, require('./views/Home').default)
+    },'Home')
 }
-const Item = (location, cb) => {
-    require.ensure([], require => {
-        cb(null, require('./components/Item').default)
-    },'Item')
-}
-// import App from './app';
-// import List from './components/List';
-// import Item from './components/Item';
-
 const router = (
     <div>
         <Router history={browserHistory}>
             <Route path="/" getComponent={App}>
-            	<IndexRoute getComponent={List}/>
-            	<Route path="item" getComponent={Item}/>
+                <IndexRoute getComponent={Home}/>
             </Route>
         </Router>
     </div>

@@ -4,10 +4,10 @@ import { Router } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { Provider } from 'react-redux';
 import routes from './router';
-import configureStore from './store';
+import configureStore from './redux';
 
 
-const initialState = window.__INITIAL_STATE__ || {list:{list:['item1', 'item2', 'item3']}, item:{item:'item1'}};
+const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
 const Root = (props) => {
   return (
