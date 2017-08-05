@@ -1,6 +1,11 @@
 import React from 'react';
 import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-router';
-
+// Hook for server
+if (typeof require.ensure !== 'function') {
+    require.ensure = function(dependencies, callback) {
+        callback(require)
+    }
+}
 const App = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./App').default)

@@ -8,7 +8,7 @@ import configureStore from '../client/store';
 import _render from './render';
 
 var app = express();
-app.use('/client', express.static(path.join(process.cwd(), 'dist', 'client')));
+app.use('/', express.static(path.join(process.cwd(), 'dist', 'client')));
 console.log(path.join(process.cwd(), 'dist', 'client'))
 function renderFullPage(html, initialState) {
   return `
@@ -26,7 +26,9 @@ function renderFullPage(html, initialState) {
       <script>
         window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
       </script>
-      <script src="/client/main.client.js"></script>
+      <script src="/manifest.chunk.js"></script>
+      <script src="/vendor.chunk.js"></script>
+      <script src="/main.client.js"></script>
     </body>
     </html>
   `;

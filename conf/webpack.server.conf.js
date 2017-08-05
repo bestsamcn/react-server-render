@@ -11,9 +11,10 @@ module.exports = [{
     output: {
         path: assetsPath,
         filename: '[name].client.js',
+        publicPath:'/',
         chunkFilename:'[name].chunk.js'
     },
-
+    vendor:['react','redux', 'react-redux', 'react-router'],
     module: {
         loaders: [{
             test: /\.jsx?$/,
@@ -21,8 +22,14 @@ module.exports = [{
         }]
     },
     plugins:[
+        new webpack.optimize.OccurrenceOrderPlugin(), 
+        new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
             'process.env': {NODE_ENV: '"production"'}
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            names:['vendor', 'manifest'],
+            filename:'[name].chunk.js'
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -33,6 +40,7 @@ module.exports = [{
             },
             sourceMap: false
         })
+
     ]
 }, {
     target: 'node',
