@@ -1,7 +1,8 @@
-var path = require('path')
-var assetsPath = path.join(process.cwd(), 'dist', 'client')
+var path = require('path');
+var assetsPath = path.join(process.cwd(), 'dist', 'client');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 module.exports = {
     name: 'browser',
     devtool: 'cheap-module-source-map',
@@ -34,6 +35,27 @@ module.exports = {
                 limit: 10000,
                 name: 'img/[name].[ext]'
             }
+        }, {
+            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            loader: 'url-loader',
+            query: {
+                limit: 10000,
+                name: 'img/[name].[ext]'
+            }
+        }, {
+            test: /\.(eot|svg|ttf|woff|woff2)\w*/,
+            loader: 'url-loader',
+            query: {
+                limit: 1000000,
+                name: 'fonts/[name].[ext]',
+            }
+        }, {
+            test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            loader: "file-loader",
+            query: {
+                name: 'fonts/[name].[ext]',
+            }
+
         }]
     },
     resolve: {
@@ -54,7 +76,8 @@ module.exports = {
             filename: 'index.html',
             template: 'index.html',
             inject: true
-        })
+        }),
+        new OpenBrowserPlugin({ url: 'http://localhost:8080'})
 
     ]
 }

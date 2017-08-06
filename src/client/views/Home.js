@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 import ArticleList from '../components/article/ArticleList';
-import * as ACT from '../redux/actions';
+import ACT from '../redux/actions';
 import * as API from '../api';
 import '../assets/css/home/index.css';
 
@@ -20,24 +20,21 @@ class Home extends React.Component {
             categoryArticleGroup:[],
             tagArticleGroup:[]
         }
+        
+    }
+    static getInitState(store){
+        return new Promise((resolve, reject)=>{
+            API.getArticleList().then(res=>{
+                store.dispatch(ACT.home.setArticleList(res.data));
+                resolve(res.data);
+            }, err=>{ reject(err)}).catch(e=>{console.log(e)})
+        })
     }
     componentWillMount() {
-        var that = this;
-        if(__isServer__){
-            
-            this.props.getArticleList();
-            console.log(this.props)
-        }
+
     }
     componentDidMount(){
-        var a = ()=>{
-            return new Promise((resolve, reject)=>{
-                setTimeout(()=>{
-                    resolve(190);
-                }, 1000)
-            })
-        }
-        
+
     }
     render(){
         return (
@@ -57,13 +54,16 @@ class Home extends React.Component {
 
 const mapStateProps = state=>{
     return {
+        state,
         articleList:state.home.articleList
     }
 }
 
 const mapDispatchProps = dispatch=>{
     return{
-        getArticleList:(params)=>dispatch(ACT.getArticleList(params))
+        dispatch,
+        getArticleList:(params)=>dispatch(ACT.home.getArticleList(params))
+        
     }
 }
 

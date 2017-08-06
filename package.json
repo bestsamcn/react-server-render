@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "start": "webpack  --watch --config ./conf/webpack.server.conf.js --progress",
-    "server":"nodemon ./dist/server/main.server.js",
-    "clean":"rimraf ./dist",
-    "client": "webpack-dev-server --config ./conf/webpack.config.js --host localhost --progress --inline --hot --history-api-fallback --content-base "
+    "start": "webpack  --watch --config ./conf/webpack.server.dev.conf.js --progress",
+    "server": "nodemon ./dist/server/main.server.js",
+    "clean": "rimraf ./dist",
+    "build":"webpack --config ./conf/webpack.server.build.conf.js --progress",
+    "client": "webpack-dev-server --config ./conf/webpack.client.conf.js --host localhost --progress --inline --hot --history-api-fallback --content-base "
   },
   "devDependencies": {
     "axios": "^0.16.2",
@@ -48,6 +49,7 @@
   "dependencies": {
     "element-react": "^1.0.16",
     "element-theme-default": "^1.3.7",
+    "open-browser-webpack-plugin": "0.0.5",
     "redux-sequence-action": "^0.2.1",
     "simplemde": "^1.11.2"
   }

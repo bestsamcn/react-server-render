@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
-import home from './home';
 import common from './common';
+import home from './home';
+import search from './search';
+
 let rootReducer = combineReducers({
 	common,
-	home
+	home,
+	search
 });
 
 export default rootReducer;

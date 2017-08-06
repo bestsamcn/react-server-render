@@ -18,11 +18,17 @@ const Home = (location, cb) => {
         cb(null, require('./views/Home').default)
     },'Home')
 }
+const Search = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./views/Search').default)
+    },'Search')
+}
 const router = (
     <div>
         <Router history={browserHistory}>
             <Route path="/" getComponent={App}>
                 <IndexRoute getComponent={Home}/>
+                <Route path="search" getComponent={Search}/>
             </Route>
         </Router>
     </div>

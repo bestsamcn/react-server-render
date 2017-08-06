@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as CONFIG from '../../config';
 import '../../assets/css/article/articleList.css';
 import Helper from '../../utils/helper';
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router';
 const ArticleList = ({articleList, isMore, isShowMore=true, isMobile, onLoadMore})=>{
     //指令真难搞
     let autoSize = e=>{
@@ -21,7 +21,7 @@ const ArticleList = ({articleList, isMore, isShowMore=true, isMobile, onLoadMore
             }
         }
     }
-    let goUrl = (e, url)=>{
+    let goUrl = (url)=>{
         browserHistory.push(url);
     }
     return (

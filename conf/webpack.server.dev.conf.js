@@ -8,6 +8,7 @@ rm(process.cwd() + '/dist', err => console.log(err));
 
 module.exports = [{
     name: 'browser',
+    devtool: 'cheap-module-source-map',
     entry: {
         //[app]为输出的文件名，output下的filename
         main:'./src/client/main.js',
@@ -97,6 +98,7 @@ module.exports = [{
     ]
 }, {
     name: 'server',
+    devtool: 'cheap-module-source-map',
     target: 'node',
     node: {
         __filename: true,

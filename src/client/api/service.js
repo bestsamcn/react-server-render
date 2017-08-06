@@ -56,6 +56,7 @@ var _http = function(type, url, params, isToast){
             return resolve(res.data);
         }, err=>{
             // isToast && store.dispatch(setToast('异常'));
+            reject(err);
             console.log(err, '请求失败');
         }).catch(e=>{
             // isToast && store.dispatch(setToast('异常'));
