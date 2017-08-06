@@ -24,12 +24,20 @@ class Home extends React.Component {
     componentWillMount() {
         var that = this;
         if(__isServer__){
-            API.getArticleList().then(res=>{
-                // that.setState({articleList:res.data})
-            });
+            
+            this.props.getArticleList();
+            console.log(this.props)
         }
     }
     componentDidMount(){
+        var a = ()=>{
+            return new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                    resolve(190);
+                }, 1000)
+            })
+        }
+        
     }
     render(){
         return (

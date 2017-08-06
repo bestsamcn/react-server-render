@@ -84,15 +84,15 @@ module.exports = [{
             names:['vendor', 'manifest'],
             filename:'js/[name].chunk.js'
         }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            output: {
-                comments: false
-            },
-            sourceMap: false
-        })
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     },
+        //     output: {
+        //         comments: false
+        //     },
+        //     sourceMap: false
+        // })
 
     ]
 }, {
@@ -158,14 +158,14 @@ module.exports = [{
             '__isClient__': false
         }),
         new ExtractTextPlugin('assets/css/[name].css', {allChunks: true}),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            output: {
-                comments: false
-            },
-            sourceMap: false
-        })
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     },
+        //     output: {
+        //         comments: false
+        //     },
+        //     sourceMap: false
+        // })
     ]
 }]

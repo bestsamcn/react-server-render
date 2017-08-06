@@ -13,6 +13,10 @@ class App extends React.Component{
         }
     }
     componentWillReceiveProps(nextProps) {
+        
+    }
+    componentDidMount() {
+        
     }
     render(){
         return(

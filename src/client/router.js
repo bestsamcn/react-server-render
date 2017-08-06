@@ -1,6 +1,7 @@
 import React from 'react';
 import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-router';
 import './assets/css/common/base.css';
+import './assets/libs/Font-Awesome-3.2.1/css/font-awesome.min.css';
 // Hook for server
 if (typeof require.ensure !== 'function') {
     require.ensure = function(dependencies, callback) {

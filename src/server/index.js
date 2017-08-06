@@ -52,14 +52,14 @@ app.use((req, res) => {
         } else if (renderProps) {
 
             var store = configureStore();
-            API.getArticleList().then(ret => {
-                store.dispatch({
-                    type: 'SET_ARTICLE_LIST',
-                    payload: ret.data
-                });
-                var html = _render(store, renderProps);
-                res.end(renderFullPage(html, store.getState()));
-            })
+            // API.getArticleList().then(ret => {
+            //     store.dispatch({
+            //         type: 'SET_ARTICLE_LIST',
+            //         payload: ret.data
+            //     });
+            // })
+            var html = _render(store, renderProps);
+            res.end(renderFullPage(html, store.getState()));
 
         } else {
             res.status(404).end('Not found');

@@ -21,7 +21,7 @@ const ArticleList = ({articleList, isMore, isShowMore=true, isMobile, onLoadMore
             }
         }
     }
-    let goUrl = url=>{
+    let goUrl = (e, url)=>{
         browserHistory.push(url);
     }
     return (

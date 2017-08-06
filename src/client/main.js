@@ -18,3 +18,4 @@ const Root = (props) => {
 }
 
 render(<Root />, document.getElementById('app'));
+export default store;
