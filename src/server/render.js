@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { RoutingContext  } from 'react-router';
+import { match, RoutingContext  } from 'react-router';
 import { Provider } from 'react-redux';
 
 export default (store, renderProps)=>{

@@ -12,7 +12,7 @@ let initState = {
 const search = (state=initState, action)=>{
 	switch(action.type){
 		case TYPE.search.SET_ARTICLE_LIST:
-			return Object.assign({}, state, action.payload);
+			return Object.assign({}, state, {articleList:action.payload});
 		default:
 			return state;
 	}

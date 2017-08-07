@@ -9,13 +9,12 @@ import configureStore from './redux';
 
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
-const Root = (props) => {
-  return (
-      <Provider store={store}>
-          {routes}
-      </Provider>
-  );
-}
 
-render(<Root />, document.getElementById('app'));
+
+render(
+	<Provider store={store}>
+          {routes}
+    </Provider>, 
+    document.getElementById('app')
+);
 export default store;

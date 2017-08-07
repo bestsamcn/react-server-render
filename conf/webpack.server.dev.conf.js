@@ -31,8 +31,7 @@ module.exports = [{
             exclude: /(node_modules|bower_components)/,
             query:{
                 presets: ['es2015', 'react']
-            },
-            plugins: ['transform-runtime', 'add-module-exports'],
+            }
         }, {
             test: /\.css$/,
             loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
@@ -76,7 +75,7 @@ module.exports = [{
         new webpack.optimize.DedupePlugin(),
         new ExtractTextPlugin('css/[name].css', {allChunks: true}),
         new webpack.DefinePlugin({
-            'process.env': {NODE_ENV: '"production"'},
+            'process.env': {NODE_ENV: '"development"'},
             '__isServer__': false,
             '__isClient__': true
         }),
@@ -109,7 +108,6 @@ module.exports = [{
         path: serverPath,
         filename: 'main.server.js',
         library: 'index',
-        chunkFilename:'[name].chunk.js',
         libraryTarget: 'commonjs'
     },
     module: {
@@ -155,7 +153,7 @@ module.exports = [{
     },
     plugins:[
         new webpack.DefinePlugin({
-            'process.env': {NODE_ENV: '"production"'},
+            'process.env': {NODE_ENV: '"development"'},
             '__isServer__': true,
             '__isClient__': false
         }),

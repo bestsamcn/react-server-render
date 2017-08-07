@@ -12,25 +12,17 @@ import '../assets/css/search/index.css';
 
 
 class Search extends React.Component{
-    static getInitState(store) {
+    static getInitState(dispatch) {
         return new Promise((resolve, reject)=>{
             API.getArticleList().then(res=>{
-                let payload = {
-                    isMore:true,
-                    articleList:[],
-                };
-                payload.articleList = res.data;
-                if(res.total < PAGE_SIZE){
-                    payload.isMore = false;
-                }
-                store.dispatch(ACT.search.setArticleList(payload));
+                dispatch(ACT.search.setArticleList(res.data));
                 resolve(res.data);
             }, err=>{ reject(err)}).catch(e=>{console.log(e)})
         })
     }
 	constructor(props){
 		super(props);
-        let { search } = this.props;
+        let { search } = this.props.state;
 		this.state = {
 			pageIndex:1,
 			pageSize:PAGE_SIZE,
@@ -89,18 +81,21 @@ class Search extends React.Component{
         return false;
     }
     componentWillMount() {
-        
+        console.log(__isClient__, __isServer__);
+         this.constructor.getInitState(this.props.dispatch); 
         // console.log(this.state.isCache)
     }
     componentDidMount() {
-        console.log('moun')
-        if(this.props.hotWord && this.props.hotWord.isFromHotWord && this.props.hotWord.name){
-            this.setState({keyword: this.props.hotWord.name}, ()=>{
-                if(!this.state.isCache) this.getSearchList(true);
-            });
-            return;
-        }
-        this.getSearchList(true);
+        // console.log('moun')
+        // if(this.props.hotWord && this.props.hotWord.isFromHotWord && this.props.hotWord.name){
+        //     this.setState({keyword: this.props.hotWord.name}, ()=>{
+        //         if(!this.state.isCache) this.getSearchList(true);
+        //     });
+        //     return;
+        // }
+        // this.getSearchList(true);
+        
+        __isClient__ && this.constructor.getInitState(this.props.dispatch); 
     }
 	render(){
 		return(
@@ -113,7 +108,7 @@ class Search extends React.Component{
 		                <i className="icon-search search-btn"></i>
 		            </div>
 		            <div className="margin-top-20">
-		                <ArticleList onLoadMore={()=>this.getSearchList(false)} isMobile={this.props.isMobile} isShowMore={true} className="padding-0 border-top-1" isMore={this.state.isMore} articleList={this.state.articleList} />
+		                <ArticleList onLoadMore={()=>this.getSearchList(false)} isMobile={this.props.isMobile} isShowMore={true} className="padding-0 border-top-1" isMore={this.props.state.search.isMore} articleList={this.props.state.search.articleList} />
 		            </div>
 		        </div>
 		        <BFooter className="margin-top-20" />
@@ -125,7 +120,7 @@ class Search extends React.Component{
 
 const mapStateProps = state=>{
     return {
-        ...state,
+        state,
         isMobile:state.common.isMobile,
         hotWord:state.common.hotWord
     }
