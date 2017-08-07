@@ -29,8 +29,7 @@ function renderFullPage(html, initialState) {
       <script>
         window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
       </script>
-      <script src="/js/manifest.chunk.js"></script>
-      <script src="/js/vendor.chunk.js"></script>
+      
       <script src="/js/main.client.js"></script>
     </body>
     </html>

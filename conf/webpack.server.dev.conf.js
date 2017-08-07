@@ -13,7 +13,7 @@ module.exports = [{
         //[app]为输出的文件名，output下的filename
         main:'./src/client/main.js',
         //公共文件分离
-        vendor:['react','redux', 'react-redux', 'react-router']
+        // vendor:['react','redux', 'react-redux', 'react-router']
     },
 
     output: {
@@ -80,10 +80,10 @@ module.exports = [{
             '__isClient__': true
         }),
         //分离manifest
-        new webpack.optimize.CommonsChunkPlugin({
-            names:['vendor', 'manifest'],
-            filename:'js/[name].chunk.js'
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     names:['vendor', 'manifest'],
+        //     filename:'js/[name].chunk.js'
+        // }),
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {
         //         warnings: false
@@ -108,6 +108,7 @@ module.exports = [{
         path: serverPath,
         filename: 'main.server.js',
         library: 'index',
+        chunkFilename:'[name].chunk.js',
         libraryTarget: 'commonjs'
     },
     module: {

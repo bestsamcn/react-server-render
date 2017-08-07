@@ -20,10 +20,10 @@ class Home extends React.Component {
         })
     }
     componentWillMount() {
-
+        //就算通过常量判断平台，但是依然无法传入服务端的store进行初始化操作。所以想在服务端完成store初始化，只能使用静态方法在服务端初始化。
     }
     componentDidMount(){
-        this.constructor.getInitState(this.props.dispatch);
+        // __isServer__ && this.constructor.getInitState(this.props.dispatch);
     }
     render(){
         return (
