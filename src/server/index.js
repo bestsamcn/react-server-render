@@ -11,7 +11,6 @@ import * as API from '../client/api';
 
 var app = express();
 app.use('/', express.static(path.join(process.cwd(), 'dist', 'client')));
-console.log(path.join(process.cwd(), 'dist', 'client'))
 
 function renderFullPage(html, initialState) {
     return `

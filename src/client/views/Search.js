@@ -81,7 +81,6 @@ class Search extends React.Component{
         return false;
     }
     componentWillMount() {
-        console.log(__isClient__, __isServer__);
          this.constructor.getInitState(this.props.dispatch); 
         // console.log(this.state.isCache)
     }

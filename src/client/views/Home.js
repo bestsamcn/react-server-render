@@ -20,7 +20,6 @@ class Home extends React.Component {
         })
     }
     componentWillMount() {
-    	console.log(this.props.articleList)
 
     }
     componentDidMount(){
