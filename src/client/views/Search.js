@@ -11,15 +11,16 @@ import ArticleList from '../components/article/ArticleList';
 import '../assets/css/search/index.css';
 
 
+//搜索不做服务端数据渲染
 class Search extends React.Component{
-    static getInitState(dispatch) {
-        return new Promise((resolve, reject)=>{
-            API.getArticleList().then(res=>{
-                dispatch(ACT.search.setArticleList(res.data));
-                resolve(res.data);
-            }, err=>{ reject(err)}).catch(e=>{console.log(e)})
-        })
-    }
+    // static getInitState(dispatch) {
+    //     return new Promise((resolve, reject)=>{
+    //         API.getArticleList().then(res=>{
+    //             dispatch(ACT.search.setArticleList(res.data));
+    //             resolve(res.data);
+    //         }, err=>{ reject(err)}).catch(e=>{console.log(e)})
+    //     })
+    // }
 	constructor(props){
 		super(props);
         let { search } = this.props.state;
@@ -81,20 +82,19 @@ class Search extends React.Component{
         return false;
     }
     componentWillMount() {
-         this.constructor.getInitState(this.props.dispatch); 
+         // this.constructor.getInitState(this.props.dispatch); 
         // console.log(this.state.isCache)
     }
     componentDidMount() {
-        // console.log('moun')
-        // if(this.props.hotWord && this.props.hotWord.isFromHotWord && this.props.hotWord.name){
-        //     this.setState({keyword: this.props.hotWord.name}, ()=>{
-        //         if(!this.state.isCache) this.getSearchList(true);
-        //     });
-        //     return;
-        // }
-        // this.getSearchList(true);
+        if(this.props.hotWord && this.props.hotWord.isFromHotWord && this.props.hotWord.name){
+            this.setState({keyword: this.props.hotWord.name}, ()=>{
+                if(!this.state.isCache) this.getSearchList(true);
+            });
+            return;
+        }
+        this.getSearchList(true);
         
-        __isClient__ && this.constructor.getInitState(this.props.dispatch); 
+        // __isClient__ && this.constructor.getInitState(this.props.dispatch); 
     }
 	render(){
 		return(
@@ -107,7 +107,7 @@ class Search extends React.Component{
 		                <i className="icon-search search-btn"></i>
 		            </div>
 		            <div className="margin-top-20">
-		                <ArticleList onLoadMore={()=>this.getSearchList(false)} isMobile={this.props.isMobile} isShowMore={true} className="padding-0 border-top-1" isMore={this.props.state.search.isMore} articleList={this.props.state.search.articleList} />
+		                <ArticleList onLoadMore={()=>this.getSearchList(false)} isMobile={this.props.isMobile} isShowMore={true} className="padding-0 border-top-1" isMore={this.state.isMore} articleList={this.state.articleList} />
 		            </div>
 		        </div>
 		        <BFooter className="margin-top-20" />
