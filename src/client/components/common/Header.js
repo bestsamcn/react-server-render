@@ -4,6 +4,7 @@ import {IndexLink, Link, browserHistory} from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../../assets/css/common/header.css';
+import ACT from '../../redux/actions';
 
 //非方法
 class Header extends React.Component {
@@ -11,8 +12,8 @@ class Header extends React.Component {
         super(props);
     }
     render(){
-        let isLogin = this.props.isLogin || false;
-        let setLogin = this.props.setLogin;
+        let common = this.props.state.common;
+        let dispatch = this.props.dispatch;
         return (
             <div className="header">
                 <IndexLink to="/" activeClassName="active" className="logo color-green" >B<span className="color-black font-20">est</span></IndexLink>
@@ -21,10 +22,10 @@ class Header extends React.Component {
                     <Link to="/search" activeClassName="active">搜索</Link>
                     <Link to="/about" activeClassName="active">关于</Link>
                     <Link to="/message" activeClassName="active">留言</Link>
-                    <Link to={isLogin ? '/admin/home' : '/admin/signin'} activeClassName="active">{isLogin ? '管理' : '登录'}</Link>
+                    <Link to={common.isLogin ? '/admin/home' : '/admin/signin'} activeClassName="active">{common.isLogin ? '管理' : '登录'}</Link>
                 </div>
                 <div className="menu-btn md-hide">
-                    <a href="javascript:;" onClick={this.props.setToggleMenu} className={this.props.iShowMenu ? 'icon-reorder on' : 'icon-reorder' }></a>
+                    <a href="javascript:;" onClick={()=>dispatch(ACT.common.setToggleMenu())} className={common.iShowMenu ? 'icon-reorder on' : 'icon-reorder' }></a>
                 </div>
             </div>
         )
@@ -35,11 +36,12 @@ class Header extends React.Component {
 
 const mapStateProps = (state) => {
     return {
+        state
     }
 }
 const mapDispatchProps = (dispatch) => {
     return {
-       
+       dispatch
     }
 }
 

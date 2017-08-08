@@ -33,6 +33,16 @@ const About = (location, cb) => {
     },'About')
 }
 
+const Admin = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/admin').default)
+    },'Admin')
+}
+const Signin = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./views/admin/Signin').default)
+    },'Signin')
+}
 const router = (
     <div>
         <Router history={browserHistory}>
@@ -41,6 +51,10 @@ const router = (
                 <Route path="/search" getComponent={Search}/>
                 <Route path="/message" getComponent={Message}/>
                 <Route path="/About" getComponent={About}/>
+                <Route path="/admin" title="管理" getComponent={Admin}>
+                    <IndexRoute title="登录" getComponent={Signin} />
+                    <Route path="signin" title="登录" getComponent={Signin} />
+                </Route>
             </Route>
         </Router>
     </div>

@@ -120,7 +120,7 @@ class Home extends React.Component {
                         <div className="left-cont">
                             <ArticleList onLoadMore={()=>{}} isShowMore={true} isMobile={false} isMore={false} articleList={this.props.articleList} />
                         </div>
-                        {!this.props.isMobile && <div className="right-bar sm-hide" ref="scrollBar">
+                        {!this.props.state.common.isMobile && <div className="right-bar sm-hide" ref="scrollBar">
                             <Category onCateClick={this.goArticleClick.bind(this)} categoryArticleGroup={this.state.categoryArticleGroup}>
                                 <div className="title color-black">
                                     分类
@@ -144,7 +144,6 @@ class Home extends React.Component {
 const mapStateProps = state=>{
     return {
         state,
-        isMobile:false,
         articleList:state.home.articleList
     }
 }

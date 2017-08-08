@@ -56,9 +56,9 @@ class Rank extends React.Component{
         });
     }
     componentWillMount() {
-        this.getHotList();
-        this.getLatestComent();
-        this.getReadNumAritlce();
+        __isClient__ && this.getHotList();
+        __isClient__ && this.getLatestComent();
+        __isClient__ && this.getReadNumAritlce();
     }
     render(){
         return (
