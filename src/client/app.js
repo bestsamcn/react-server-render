@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from './components/common/Header';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import './assets/libs/animate.css/animate.css';
 
 class App extends React.Component{
     constructor(props) {
